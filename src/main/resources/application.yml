@@ -18,5 +18,41 @@ spring:
       url: jdbc:mysql://localhost:3306/mybatis
       username: root
       password: marta1014
+
+# 应用环境
+  profiles:
+    active: dev
+    # include: devDB # 包涵devBD环境 比如该环境抽离了数据库相关配置 注意顺序 缺点单一
+    # group: # 灵活！奈斯～
+    #  "dev": devDB,dev...
+    #  "pro": proDB,pro...
+
+# 设置环境模拟
+# 最好是把多环境配置抽离
+# template application-dev.yml/application-pro.yml
+---
+#
+spring:
+  config:
+    activate:
+      on-profile: dev
 server:
-  port: 8082
+  port: 80
+
+---
+#
+spring:
+  config:
+    activate:
+      on-profile: pro
+server:
+  port: 8083
+
+---
+#
+spring:
+  config:
+    activate:
+      on-profile: uat
+server:
+  port: 8087
